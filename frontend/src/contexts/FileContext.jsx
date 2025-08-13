@@ -13,7 +13,7 @@ export const useFiles = () => {
 
 // Backend call to update favorite status
 const updateFileFavorite = async (id, favorite) => {
-  return axios.post(`http://localhost:5000/documents/${id}/favorite`, { favorite });
+  return axios.post(`https://patient-portal-m4cy.onrender.com/documents/${id}/favorite`, { favorite });
 };
 
 const calculateStats = (files) => {
@@ -38,7 +38,7 @@ export const FileProvider = ({ children }) => {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/documents');
+      const response = await axios.get('https://patient-portal-m4cy.onrender.com/documents');
       setFiles(response.data.documents || []);
     } catch (error) {
       console.error('Failed to fetch files:', error);
@@ -50,7 +50,7 @@ export const FileProvider = ({ children }) => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:5000/documents/upload', formData, {
+      const response = await axios.post('https://patient-portal-m4cy.onrender.com/documents/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -67,7 +67,7 @@ export const FileProvider = ({ children }) => {
 
   const deleteFile = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/documents/${id}`);
+      await axios.delete(`https://patient-portal-m4cy.onrender.com/documents/${id}`);
       setFiles((prev) => prev.filter((file) => file.id !== id));
     } catch (error) {
       console.error('Delete error:', error);
@@ -76,7 +76,7 @@ export const FileProvider = ({ children }) => {
   };
 
   const downloadFile = (id) => {
-    window.open(`http://localhost:5000/documents/${id}/download`, '_blank');
+    window.open(`https://patient-portal-m4cy.onrender.com/documents/${id}/download`, '_blank');
   };
 
   const getRecentFiles = (limit = 3) => {
