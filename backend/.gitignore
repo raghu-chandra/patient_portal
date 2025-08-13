@@ -1,0 +1,13 @@
+# Node modules
+node_modules/
+# Environment variables
+.env
+# Uploads
+uploads/
+# Logs
+*.log
+# OS files
+.DS_Store
+# Optional
+package-lock.json  # keep if you want exact dependency versions
+.vscode
