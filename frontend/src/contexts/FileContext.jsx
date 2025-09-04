@@ -38,7 +38,7 @@ export const FileProvider = ({ children }) => {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('https://patient-portal-m4cy.onrender.com/documents');
+      const response = await axios.get('http://localhost:5000/documents');
       setFiles(response.data.documents || []);
     } catch (error) {
       console.error('Failed to fetch files:', error);
@@ -50,7 +50,7 @@ export const FileProvider = ({ children }) => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('https://patient-portal-m4cy.onrender.com/documents/upload', formData, {
+      const response = await axios.post('http://localhost:5000/documents/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -67,7 +67,7 @@ export const FileProvider = ({ children }) => {
 
   const deleteFile = async (id) => {
     try {
-      await axios.delete(`https://patient-portal-m4cy.onrender.com/documents/${id}`);
+      await axios.delete(`http://localhost:5000/documents/${id}`);
       setFiles((prev) => prev.filter((file) => file.id !== id));
     } catch (error) {
       console.error('Delete error:', error);
@@ -76,7 +76,7 @@ export const FileProvider = ({ children }) => {
   };
 
   const downloadFile = (id) => {
-    window.open(`https://patient-portal-m4cy.onrender.com/documents/${id}/download`, '_blank');
+    window.open(`http://localhost:5000/documents/${id}/download`, '_blank');
   };
 
   const getRecentFiles = (limit = 3) => {
